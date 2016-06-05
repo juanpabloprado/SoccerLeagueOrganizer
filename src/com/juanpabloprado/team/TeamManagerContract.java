@@ -1,4 +1,4 @@
-package com.juanpabloprado;
+package com.juanpabloprado.team;
 
 public interface TeamManagerContract {
   void showTeams();

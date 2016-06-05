@@ -1,4 +1,4 @@
-package com.juanpabloprado;
+package com.juanpabloprado.util;
 
 import java.util.List;
 

@@ -1,5 +1,8 @@
-package com.juanpabloprado;
+package com.juanpabloprado.menu;
 
+import com.juanpabloprado.team.TeamListener;
+import com.juanpabloprado.team.TeamManagerContract;
+import com.juanpabloprado.util.PrompterUtil;
 import java.io.Console;
 
 public class MenuPrompter {

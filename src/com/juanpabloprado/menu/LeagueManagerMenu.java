@@ -1,4 +1,4 @@
-package com.juanpabloprado;
+package com.juanpabloprado.menu;
 
 public class LeagueManagerMenu {
 
