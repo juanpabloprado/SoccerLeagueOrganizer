@@ -28,7 +28,6 @@ public class MenuPrompter {
     if (isValidOption(optionSelected)) {
       currentMenuItem = optionSelected;
       onOptionsMenuSelected();
-      System.out.println(currentMenuItem);
     } else {
       System.out.println("Invalid option, please try again");
       promptMenu();

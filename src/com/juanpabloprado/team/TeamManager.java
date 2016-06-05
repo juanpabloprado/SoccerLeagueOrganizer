@@ -27,6 +27,7 @@ public class TeamManager implements TeamManagerContract {
 
   @Override public void showTeams() {
     Collections.sort(teams, new TeamByNameComparator());
+    PrompterUtil.displayTeamsTitle();
     PrompterUtil.printPrettyList(teams);
   }
 
