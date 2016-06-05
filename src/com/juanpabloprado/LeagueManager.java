@@ -13,7 +13,7 @@ public class LeagueManager {
     // Your code here!
 
     LeagueManagerMenu menu = new LeagueManagerMenu(
-        new String[] {"Create a new team", "Add players to a team", "Remove players from a team"});
+        new String[] {"Create a new team", "Add players to a team", "Remove players from a team", "Exit"});
     MenuPrompter menuPrompter = new MenuPrompter(menu);
     final TeamManager teamManager = new TeamManager(players);
 
@@ -25,7 +25,17 @@ public class LeagueManager {
           PrompterUtil.displayError(e, "You may want to create more players first.");
         }
       }
+
+      @Override public void onPlayerAdded() {
+
+      }
+
+      @Override public void onPlayerRemoved() {
+
+      }
     });
+
+    menuPrompter.setTeamManagerContract(teamManager);
     menuPrompter.start();
   }
 }
