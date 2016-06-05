@@ -1,5 +1,9 @@
 package com.juanpabloprado;
 
 public interface TeamListener {
-    void onCreate(String teamName, String teamCoach);
+  void onCreate(String teamName, String teamCoach);
+
+  void onPlayerAdded();
+
+  void onPlayerRemoved();
 }
