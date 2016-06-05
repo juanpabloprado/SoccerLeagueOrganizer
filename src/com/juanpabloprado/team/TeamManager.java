@@ -1,8 +1,11 @@
-package com.juanpabloprado;
+package com.juanpabloprado.team;
 
+import com.juanpabloprado.team.list.TeamByNameComparator;
+import com.juanpabloprado.util.PrompterUtil;
 import com.juanpabloprado.model.Player;
 import com.juanpabloprado.model.Team;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TeamManager implements TeamManagerContract {
@@ -23,6 +26,7 @@ public class TeamManager implements TeamManagerContract {
   }
 
   @Override public void showTeams() {
+    Collections.sort(teams, new TeamByNameComparator());
     PrompterUtil.printPrettyList(teams);
   }
 
