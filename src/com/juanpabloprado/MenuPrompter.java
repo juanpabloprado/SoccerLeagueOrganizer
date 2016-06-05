@@ -12,6 +12,7 @@ public class MenuPrompter {
   private int currentMenuItem;
   private LeagueManagerMenu menu;
   private TeamListener teamListener;
+  private TeamManagerContract teamManagerContract;
 
   public MenuPrompter(LeagueManagerMenu menu) {
     this.menu = menu;
@@ -35,13 +36,24 @@ public class MenuPrompter {
     switch (currentMenuItem) {
       case 1:
         promptsForTeam();
+        promptMenu();
         break;
       case 2:
+        promptsForAddingPlayers();
+        promptMenu();
         break;
       case 3:
+        promptMenu();
+        break;
+      case 4:
         break;
     }
   }
+
+  private void promptsForAddingPlayers() {
+    teamManagerContract.showTeams();
+  }
+
 
   public void promptsForTeam() {
     String teamName = console.readLine("%nWhat name do you want for your team?%n");
@@ -49,7 +61,6 @@ public class MenuPrompter {
       String teamCoach = console.readLine("%nWhat is the name of your team's coach?%n");
       if (!teamCoach.isEmpty()) {
         teamListener.onCreate(teamName, teamCoach);
-        promptMenu();
       }
     }
   }
@@ -61,5 +72,9 @@ public class MenuPrompter {
   public void start() {
     PrompterUtil.displayWelcome();
     promptMenu();
+  }
+
+  public void setTeamManagerContract(TeamManagerContract teamManagerContract) {
+    this.teamManagerContract = teamManagerContract;
   }
 }
