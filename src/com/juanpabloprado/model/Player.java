@@ -35,14 +35,8 @@ public class Player implements Comparable<Player>, Serializable {
 
   @Override
   public int compareTo(Player rhs) {
-    // We always want to sort by last name then first name
-    int lastNameCompare = lastName.compareTo(rhs.getLastName());
-    int firstNameCompare = firstName.compareTo(rhs.getFirstName());
-    if (lastNameCompare != 0) {
-      return lastNameCompare;
-    } else {
-      return firstNameCompare;
-    }
+    int lastCmp = lastName.compareTo(rhs.lastName);
+    return (lastCmp != 0 ? lastCmp : firstName.compareTo(rhs.firstName));
   }
 
   @Override
@@ -56,7 +50,6 @@ public class Player implements Comparable<Player>, Serializable {
     if (previousExperience != player.previousExperience) return false;
     if (!firstName.equals(player.firstName)) return false;
     return lastName.equals(player.lastName);
-
   }
 
   @Override
@@ -66,5 +59,10 @@ public class Player implements Comparable<Player>, Serializable {
     result = 31 * result + heightInInches;
     result = 31 * result + (previousExperience ? 1 : 0);
     return result;
+  }
+
+  @Override public String toString() {
+    return String.format("%-30s %-10s %s", lastName + ", " + firstName, heightInInches,
+        previousExperience ? "Yes" : "No");
   }
 }
