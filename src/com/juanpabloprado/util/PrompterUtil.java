@@ -11,6 +11,7 @@ public class PrompterUtil {
 
   public static void displayTeamsTitle() {
     System.out.printf("%nTEAMS %s", SEPARATOR);
+    System.out.printf("%-2s %-30s %n", "#", "NAME");
   }
 
   public static void displayError(Exception e, String message) {
@@ -20,7 +21,12 @@ public class PrompterUtil {
   public static void printPrettyList(List list) {
     for (int i = 0, listSize = list.size(); i < listSize; i++) {
       Object item = list.get(i);
-      System.out.printf("%d. %s%n", i + 1, item.toString());
+      System.out.printf("%-2d %s%n", i + 1, item.toString());
     }
+  }
+
+  public static void displayPlayersTitle() {
+    System.out.printf("%nPLAYERS %s", SEPARATOR);
+    System.out.printf("%-2s %-30s %-10s %s%n", "#", "NAME", "HEIGHT", "EXPERIENCE");
   }
 }
