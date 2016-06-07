@@ -15,6 +15,7 @@ public class TeamManager implements TeamManagerContract {
   private List<Team> teams;
   private Set<Player> availablePayers;
   private List<Player> players;
+  private ArrayList<Player> roster;
 
   public TeamManager(Player[] availablePayers) {
     this.availablePayers = new HashSet<Player>(Arrays.asList(availablePayers));
@@ -46,6 +47,7 @@ public class TeamManager implements TeamManagerContract {
 
   @Override public void showAvailablePlayers() {
     if (availablePayers.size() > 0) {
+      refillPlayers();
       PrompterUtil.displayPlayersTitle();
       Collections.sort(players);
       PrompterUtil.printPrettyList(players);
@@ -54,16 +56,38 @@ public class TeamManager implements TeamManagerContract {
     }
   }
 
+  private void refillPlayers() {
+    players.clear();
+    players.addAll(availablePayers);
+  }
+
   @Override public Player choosePlayer(int index) {
     return players.get(index);
   }
 
   @Override public void addPlayer(Player player, Team toTeam) {
+    availablePayers.remove(player);
     toTeam.getPlayers().add(player);
   }
 
   @Override public void removePlayer(Player player, Team fromTeam) {
+    availablePayers.add(player);
     fromTeam.getPlayers().remove(player);
+  }
+
+  @Override public void showTeamRoster(Team fromTeam) {
+    roster = new ArrayList<Player>(fromTeam.getPlayers());
+    if(roster.size() > 0) {
+      Collections.sort(roster);
+      PrompterUtil.displayTeamTitle(fromTeam.getName());
+      PrompterUtil.printPrettyList(roster);
+    } else {
+      throw new TeamException("The players list is empty");
+    }
+  }
+
+  @Override public Player choosePlayerFromTeam(int index) {
+    return roster.get(index);
   }
 
   public class TeamException extends RuntimeException {

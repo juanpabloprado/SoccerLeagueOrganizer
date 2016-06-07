@@ -1,17 +1,19 @@
 package com.juanpabloprado.menu;
 
+import com.juanpabloprado.BasicPrompter;
 import com.juanpabloprado.model.Player;
 import com.juanpabloprado.model.Team;
-import com.juanpabloprado.player.PlayerPrompterHelper;
+import com.juanpabloprado.player.AddsPlayerPrompter;
+import com.juanpabloprado.player.PlayerPrompter;
+import com.juanpabloprado.player.RemovesPlayerPrompter;
 import com.juanpabloprado.team.TeamManager;
 import com.juanpabloprado.team.TeamManagerContract;
 import com.juanpabloprado.util.PrompterUtil;
-import java.io.Console;
 import java.util.HashSet;
 
-public class MenuPrompter {
-  private static final Console console = System.console();
-  private final PlayerPrompterHelper playerPrompterHelper;
+public class MenuPrompter extends BasicPrompter {
+  private AddsPlayerPrompter addAction;
+  private RemovesPlayerPrompter removeAction;
 
   private int currentMenuItem;
   private LeagueManagerMenu menu;
@@ -19,7 +21,8 @@ public class MenuPrompter {
 
   public MenuPrompter(LeagueManagerMenu menu) {
     this.menu = menu;
-    playerPrompterHelper = new PlayerPrompterHelper(this);
+    addAction = new AddsPlayerPrompter(this);
+    removeAction = new RemovesPlayerPrompter(this);
   }
 
   public void promptMenu() {
@@ -55,7 +58,7 @@ public class MenuPrompter {
   }
 
   private void promptsForRemovingPlayers() {
-    playerPrompterHelper.selectPlayer(new PlayerPrompterHelper.PlayerListener() {
+    removeAction.selectPlayer(new PlayerPrompter.PlayerListener() {
       @Override public void onPlayerSelected(Player player, Team team) {
         removePlayer(player, team);
       }
@@ -69,22 +72,11 @@ public class MenuPrompter {
   }
 
   private void promptsForAddingPlayers() {
-    playerPrompterHelper.selectPlayer(new PlayerPrompterHelper.PlayerListener() {
+    addAction.selectPlayer(new PlayerPrompter.PlayerListener() {
       @Override public void onPlayerSelected(Player player, Team team) {
         addPlayer(player, team);
       }
     });
-  }
-
-  public Team chooseTeam(int teamSelected) {
-    Team team = teamManagerContract.chooseTeam(teamSelected - 1);
-    System.out.printf("You chose the %s team%n", team);
-    return team;
-  }
-
-  public int promptForTeam() {
-    teamManagerContract.showTeams();
-    return Integer.parseInt(console.readLine("%nPlease insert the number of the team: "));
   }
 
   private void addPlayer(Player player, Team team) {
@@ -93,11 +85,6 @@ public class MenuPrompter {
         player.getLastName(), team, team.getPlayers().size());
   }
 
-  public int promptForPlayer() {
-    teamManagerContract.showAvailablePlayers();
-    return Integer.parseInt(
-        console.readLine("%nPlease insert the number of the player: "));
-  }
 
   private void promptsForAddingTeam() {
     String teamName = console.readLine("%nWhat name do you want for your team?%n");
