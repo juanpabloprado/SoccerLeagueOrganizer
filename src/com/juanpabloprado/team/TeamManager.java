@@ -15,12 +15,11 @@ public class TeamManager implements TeamManagerContract {
   private List<Team> teams;
   private Set<Player> availablePayers;
   private List<Player> players;
-  private ArrayList<Player> roster;
 
   public TeamManager(Player[] availablePayers) {
-    this.availablePayers = new HashSet<Player>(Arrays.asList(availablePayers));
-    this.teams = new ArrayList<Team>();
-    this.players = new ArrayList<Player>(this.availablePayers);
+    this.availablePayers = new HashSet<>(Arrays.asList(availablePayers));
+    this.teams = new ArrayList<>();
+    this.players = new ArrayList<>(this.availablePayers);
   }
 
   @Override public void addTeam(Team team) {

@@ -11,7 +11,7 @@ public class Roster implements RosterContract {
   private List<Player> roster;
 
   @Override public void showTeamRoster(Team fromTeam) {
-    roster = new ArrayList<Player>(fromTeam.getPlayers());
+    roster = new ArrayList<>(fromTeam.getPlayers());
     if(roster.size() > 0) {
       Collections.sort(roster);
       PrompterUtil.displayTeamTitle(fromTeam.getName());
