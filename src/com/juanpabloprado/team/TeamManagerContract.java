@@ -19,7 +19,4 @@ public interface TeamManagerContract {
 
   void removePlayer(Player player, Team fromTeam);
 
-  void showTeamRoster(Team fromTeam);
-
-  Player choosePlayerFromTeam(int index);
 }

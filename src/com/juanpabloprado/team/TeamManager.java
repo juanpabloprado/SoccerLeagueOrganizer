@@ -75,20 +75,6 @@ public class TeamManager implements TeamManagerContract {
     fromTeam.getPlayers().remove(player);
   }
 
-  @Override public void showTeamRoster(Team fromTeam) {
-    roster = new ArrayList<Player>(fromTeam.getPlayers());
-    if(roster.size() > 0) {
-      Collections.sort(roster);
-      PrompterUtil.displayTeamTitle(fromTeam.getName());
-      PrompterUtil.printPrettyList(roster);
-    } else {
-      throw new TeamException("The players list is empty");
-    }
-  }
-
-  @Override public Player choosePlayerFromTeam(int index) {
-    return roster.get(index);
-  }
 
   public class TeamException extends RuntimeException {
     public TeamException(String message) {
