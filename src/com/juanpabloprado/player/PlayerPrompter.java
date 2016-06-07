@@ -4,6 +4,7 @@ import com.juanpabloprado.BasicPrompter;
 import com.juanpabloprado.menu.MenuPrompter;
 import com.juanpabloprado.model.Player;
 import com.juanpabloprado.model.Team;
+import com.juanpabloprado.roster.Roster;
 import com.juanpabloprado.team.TeamManager;
 import com.juanpabloprado.util.PrompterUtil;
 
@@ -27,10 +28,10 @@ public abstract class PlayerPrompter extends BasicPrompter {
         int playerSelected = promptForPlayer(team);
         Player player = choosePlayer(playerSelected - 1);
         listener.onPlayerSelected(player, team);
-      } catch (TeamManager.TeamException e) {
+      } catch (TeamManager.TeamException | Roster.RosterException e) {
         PrompterUtil.displayError(e, "You may want to add some players to the team first");
       }
-    } catch (TeamManager.TeamException e) {
+    } catch (TeamManager.TeamException | Roster.RosterException e) {
       PrompterUtil.displayError(e, "You may want to add some teams first");
     }
   }
@@ -42,13 +43,8 @@ public abstract class PlayerPrompter extends BasicPrompter {
   }
 
   private int promptForTeam() {
-    try {
-      menuPrompter.teamManagerContract.showTeams();
-      return Integer.parseInt(console.readLine("%nPlease insert the number of the team: "));
-    } catch (TeamManager.TeamException e) {
-      PrompterUtil.displayError(e, "You may want to add some players first");
-    }
-    return 0;
+    menuPrompter.teamManagerContract.showTeams();
+    return Integer.parseInt(console.readLine("%nPlease insert the number of the team: "));
   }
 
   protected abstract Player choosePlayer(int i);
