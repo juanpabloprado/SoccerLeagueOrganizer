@@ -5,7 +5,7 @@ import com.juanpabloprado.model.Player;
 import com.juanpabloprado.model.Team;
 import com.juanpabloprado.roster.Roster;
 
-public class RemovesPlayerPrompter extends PlayerPrompter {
+public class RemovesPlayerPrompter extends BasePlayerPrompter {
   private Roster roster;
 
   public RemovesPlayerPrompter(MenuPrompter menuPrompter) {
@@ -19,7 +19,8 @@ public class RemovesPlayerPrompter extends PlayerPrompter {
 
   @Override public int promptForPlayer(Team team) {
     roster.showTeamRoster(team);
+    System.out.printf("%nPlease insert the number of the player you wish to remove: ");
     return Integer.parseInt(
-        console.readLine("%nPlease insert the number of the player you wish to remove: "));
+        readLine());
   }
 }

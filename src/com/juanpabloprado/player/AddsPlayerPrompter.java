@@ -4,7 +4,7 @@ import com.juanpabloprado.menu.MenuPrompter;
 import com.juanpabloprado.model.Player;
 import com.juanpabloprado.model.Team;
 
-public class AddsPlayerPrompter extends PlayerPrompter {
+public class AddsPlayerPrompter extends BasePlayerPrompter {
 
   public AddsPlayerPrompter(MenuPrompter menuPrompter) {
     super(menuPrompter);
@@ -16,7 +16,7 @@ public class AddsPlayerPrompter extends PlayerPrompter {
 
   @Override public int promptForPlayer(Team ignored) {
     menuPrompter.teamManagerContract.showAvailablePlayers();
-    return Integer.parseInt(
-        console.readLine("%nPlease insert the number of the player you wish to add: "));
+    System.out.printf("%nPlease insert the number of the player you wish to add: ");
+    return Integer.parseInt(readLine());
   }
 }

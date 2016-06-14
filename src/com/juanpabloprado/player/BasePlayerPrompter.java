@@ -8,16 +8,12 @@ import com.juanpabloprado.roster.Roster;
 import com.juanpabloprado.team.TeamManager;
 import com.juanpabloprado.util.PrompterUtil;
 
-public abstract class PlayerPrompter extends BasicPrompter {
+public abstract class BasePlayerPrompter extends BasicPrompter {
 
   protected MenuPrompter menuPrompter;
 
-  public PlayerPrompter(MenuPrompter menuPrompter) {
+  public BasePlayerPrompter(MenuPrompter menuPrompter) {
     this.menuPrompter = menuPrompter;
-  }
-
-  public interface PlayerListener {
-    void onPlayerSelected(Player player, Team team);
   }
 
   public void selectPlayer(PlayerListener listener) {
@@ -44,7 +40,8 @@ public abstract class PlayerPrompter extends BasicPrompter {
 
   private int promptForTeam() {
     menuPrompter.teamManagerContract.showTeams();
-    return Integer.parseInt(console.readLine("%nPlease insert the number of the team: "));
+    System.out.printf("%nPlease insert the number of the team: ");
+    return Integer.parseInt(readLine());
   }
 
   protected abstract Player choosePlayer(int i);
