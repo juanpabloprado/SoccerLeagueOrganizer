@@ -17,16 +17,17 @@ public class TeamsByHeightReporter extends TeamReporter {
 
   @Override public void printReport() {
 
-    Set<Map.Entry<Integer, Map<Player, String>>> entries = report.getPlayersByHeight().entrySet();
+    Set<Map.Entry<Integer, List<Player>>> entries = report.getPlayersByHeight().entrySet();
 
-    for (Map.Entry<Integer, Map<Player, String>> integerMapEntry : entries) {
+    for (Map.Entry<Integer, List<Player>> integerMapEntry : entries) {
 
       System.out.printf("Height %d inches%n", integerMapEntry.getKey());
-      Map<Player, String> value = integerMapEntry.getValue();
+      List<Player> players = integerMapEntry.getValue();
 
-      for (Map.Entry<Player, String> playerStringEntry : value.entrySet()) {
-        System.out.printf("%s, %s %n", playerStringEntry.getKey().toString(), playerStringEntry.getValue());
+      for (Player player : players) {
+        System.out.printf("%s, %n", player.toString());
       }
+
     }
   }
 }

@@ -2,29 +2,29 @@ package com.juanpabloprado.team.report;
 
 import com.juanpabloprado.model.Player;
 import com.juanpabloprado.model.Team;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class TeamByHeightReport {
-  Map<Integer, Map<Player, String>> playersByHeight = new HashMap<>();
-  Map<Player, String> playersPerHeight;
-  List<Integer> playersHeight;
+  Map<Integer, List<Player>> playersByHeight;
+  List<Player> players = new ArrayList<>();
 
   public TeamByHeightReport(
       List<Team> teams) {
 
     for (Team team : teams) {
-      playersPerHeight = new HashMap<>();
-      for (Player player : team.getPlayers()) {
-        int currentHeight = player.getHeightInInches();
-        playersPerHeight.put(player, team.getName());
-        playersByHeight.put(currentHeight, playersPerHeight);
-      }
+      players.addAll(team.getPlayers());
     }
+
+    playersByHeight
+        = players.stream().collect(Collectors.groupingBy(Player::getHeightInInches));
   }
 
-  public Map<Integer, Map<Player, String>> getPlayersByHeight() {
+  public Map<Integer, List<Player>> getPlayersByHeight() {
     return playersByHeight;
   }
 }
