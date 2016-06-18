@@ -19,4 +19,5 @@ public interface TeamManagerContract {
 
   void removePlayer(Player player, Team fromTeam);
 
+  void generateHeightReport();
 }

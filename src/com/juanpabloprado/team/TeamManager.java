@@ -1,6 +1,9 @@
 package com.juanpabloprado.team;
 
 import com.juanpabloprado.team.list.TeamByNameComparator;
+import com.juanpabloprado.team.report.TeamByHeightReport;
+import com.juanpabloprado.team.report.TeamReporter;
+import com.juanpabloprado.team.report.TeamsByHeightReporter;
 import com.juanpabloprado.util.PrompterUtil;
 import com.juanpabloprado.model.Player;
 import com.juanpabloprado.model.Team;
@@ -74,6 +77,11 @@ public class TeamManager implements TeamManagerContract {
     fromTeam.getPlayers().remove(player);
   }
 
+  @Override public void generateHeightReport() {
+    TeamByHeightReport heightReport = new TeamByHeightReport(teams);
+    TeamReporter reporter = new TeamsByHeightReporter(heightReport);
+    reporter.printReport();
+  }
 
   public class TeamException extends RuntimeException {
     public TeamException(String message) {
