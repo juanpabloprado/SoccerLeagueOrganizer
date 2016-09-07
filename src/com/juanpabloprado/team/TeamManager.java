@@ -1,9 +1,11 @@
 package com.juanpabloprado.team;
 
 import com.juanpabloprado.team.list.TeamByNameComparator;
-import com.juanpabloprado.team.report.TeamByHeightReport;
+import com.juanpabloprado.team.report.experience.TeamByExperienceReport;
+import com.juanpabloprado.team.report.experience.TeamsByExperienceReporter;
+import com.juanpabloprado.team.report.height.TeamByHeightReport;
 import com.juanpabloprado.team.report.TeamReporter;
-import com.juanpabloprado.team.report.TeamsByHeightReporter;
+import com.juanpabloprado.team.report.height.TeamsByHeightReporter;
 import com.juanpabloprado.util.PrompterUtil;
 import com.juanpabloprado.model.Player;
 import com.juanpabloprado.model.Team;
@@ -80,6 +82,12 @@ public class TeamManager implements TeamManagerContract {
   @Override public void generateHeightReport() {
     TeamByHeightReport heightReport = new TeamByHeightReport(teams);
     TeamReporter reporter = new TeamsByHeightReporter(heightReport);
+    reporter.printReport();
+  }
+
+  @Override public void generateExperienceReport() {
+    TeamByExperienceReport experienceReport = new TeamByExperienceReport(teams);
+    TeamReporter reporter = new TeamsByExperienceReporter(experienceReport);
     reporter.printReport();
   }
 
