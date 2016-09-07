@@ -46,4 +46,12 @@ public class PrompterUtil {
     System.out.printf("%n%s %s", name, SEPARATOR);
     System.out.printf("%-2s %-30s %-10s %s%n", "#", "NAME", "HEIGHT", "EXPERIENCE");
   }
+
+  public static Integer tryParse(String text) {
+    try {
+      return Integer.parseInt(text);
+    } catch (NumberFormatException e) {
+      return null;
+    }
+  }
 }

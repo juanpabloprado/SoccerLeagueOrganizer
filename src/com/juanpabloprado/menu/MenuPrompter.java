@@ -28,9 +28,10 @@ public class MenuPrompter extends BasicPrompter {
   public void promptMenu() {
     System.out.printf("%nPlease choose an option from the menu below:%n%s",
         menu.getFormattedMenu());
-    int optionSelected =
-        Integer.parseInt(readLine());
-    if (isValidOption(optionSelected)) {
+    Integer optionSelected =
+        PrompterUtil.tryParse(readLine());
+
+    if (optionSelected != null && isValidOption(optionSelected)) {
       currentMenuItem = optionSelected;
       onOptionsMenuSelected();
     } else {
@@ -63,7 +64,19 @@ public class MenuPrompter extends BasicPrompter {
   }
 
   private void promptsForGeneratingReports() {
-    teamManagerContract.generateHeightReport();
+    System.out.printf("%nWhat kind of report do you want to generate%n");
+    Integer optionSelected = PrompterUtil.tryParse(readLine());
+    if(optionSelected != null) {
+      switch (optionSelected) {
+        case 1:
+          teamManagerContract.generateHeightReport();
+          break;
+        case 2:
+          teamManagerContract.generateExperienceReport();
+          break;
+      }
+    }
+
   }
 
   private void promptsForRemovingPlayers() {
