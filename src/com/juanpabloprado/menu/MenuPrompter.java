@@ -59,8 +59,17 @@ public class MenuPrompter extends BasicPrompter {
         promptMenu();
         break;
       case 5:
+        promptsForShowingTeams();
+        promptMenu();
+        break;
+      case 6:
         break;
     }
+  }
+
+  private void promptsForShowingTeams() {
+    teamManagerContract.showTeams();
+    System.out.printf("%nPlease insert the number of the team: ");
   }
 
   private void promptsForGeneratingReports() {
