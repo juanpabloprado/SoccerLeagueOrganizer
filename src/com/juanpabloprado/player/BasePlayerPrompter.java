@@ -18,14 +18,19 @@ public abstract class BasePlayerPrompter extends BasicPrompter {
 
   public void selectPlayer(PlayerListener listener) {
     try {
-      int teamSelected = promptForTeam();
-      Team team = chooseTeam(teamSelected);
-      try {
-        int playerSelected = promptForPlayer(team);
-        Player player = choosePlayer(playerSelected - 1);
-        listener.onPlayerSelected(player, team);
-      } catch (TeamManager.TeamException | Roster.RosterException e) {
-        PrompterUtil.displayError(e, "You may want to add some players to the team first");
+      Integer teamSelected = promptForTeam();
+      if(teamSelected == null) {
+        System.out.printf("Please choose a valid option%n");
+        selectPlayer(listener);
+      } else {
+        Team team = chooseTeam(teamSelected);
+        try {
+          int playerSelected = promptForPlayer(team);
+          Player player = choosePlayer(playerSelected - 1);
+          listener.onPlayerSelected(player, team);
+        } catch (TeamManager.TeamException | Roster.RosterException e) {
+          PrompterUtil.displayError(e, "You may want to add some players to the team first");
+        }
       }
     } catch (TeamManager.TeamException | Roster.RosterException e) {
       PrompterUtil.displayError(e, "You may want to add some teams first");
@@ -38,10 +43,10 @@ public abstract class BasePlayerPrompter extends BasicPrompter {
     return team;
   }
 
-  private int promptForTeam() {
+  private Integer promptForTeam() {
     menuPrompter.teamManagerContract.showTeams();
     System.out.printf("%nPlease insert the number of the team: ");
-    return Integer.parseInt(readLine());
+    return PrompterUtil.tryParse(readLine());
   }
 
   protected abstract Player choosePlayer(int i);
