@@ -18,16 +18,28 @@ public class PrompterUtil {
     System.out.printf("%s, %s%n", e.getMessage(), message);
   }
 
-  public static void printPrettyList(List list) {
+  public static void printPrettyOrderedList(List list) {
     for (int i = 0, listSize = list.size(); i < listSize; i++) {
       Object item = list.get(i);
       System.out.printf("%-2d %s%n", i + 1, item.toString());
     }
   }
 
+  public static void printPrettyList(List list) {
+    for (int i = 0, listSize = list.size(); i < listSize; i++) {
+      Object item = list.get(i);
+      System.out.printf("%s%n", item.toString());
+    }
+  }
+
   public static void displayPlayersTitle() {
     System.out.printf("%nPLAYERS %s", SEPARATOR);
     System.out.printf("%-2s %-30s %-10s %s%n", "#", "NAME", "HEIGHT", "EXPERIENCE");
+  }
+
+  public static void displayTeamPlayersTitle() {
+    System.out.printf("%nPLAYERS %s", SEPARATOR);
+    System.out.printf("%-30s %-30s %-10s %s%n", "TEAM", "NAME", "HEIGHT", "EXPERIENCE");
   }
 
   public static void displayTeamTitle(String name) {

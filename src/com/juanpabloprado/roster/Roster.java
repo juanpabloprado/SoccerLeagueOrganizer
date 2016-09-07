@@ -15,7 +15,7 @@ public class Roster implements RosterContract {
     if(roster.size() > 0) {
       Collections.sort(roster);
       PrompterUtil.displayTeamTitle(fromTeam.getName());
-      PrompterUtil.printPrettyList(roster);
+      PrompterUtil.printPrettyOrderedList(roster);
     } else {
       throw new RosterException("The players list is empty");
     }

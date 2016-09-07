@@ -37,7 +37,7 @@ public class TeamManager implements TeamManagerContract {
     if (teams.size() > 0) {
       Collections.sort(teams, new TeamByNameComparator());
       PrompterUtil.displayTeamsTitle();
-      PrompterUtil.printPrettyList(teams);
+      PrompterUtil.printPrettyOrderedList(teams);
     } else {
       throw new TeamException("The team list is empty");
     }
@@ -52,7 +52,7 @@ public class TeamManager implements TeamManagerContract {
       refillPlayers();
       PrompterUtil.displayPlayersTitle();
       Collections.sort(players);
-      PrompterUtil.printPrettyList(players);
+      PrompterUtil.printPrettyOrderedList(players);
     } else {
       throw new TeamException("The players list is empty");
     }

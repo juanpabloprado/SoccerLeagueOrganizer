@@ -1,8 +1,7 @@
 package com.juanpabloprado.team.report;
 
-import com.juanpabloprado.model.Player;
-import com.juanpabloprado.model.Team;
-import java.util.HashMap;
+import com.juanpabloprado.dto.TeamPlayer;
+import com.juanpabloprado.util.PrompterUtil;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,17 +16,12 @@ public class TeamsByHeightReporter extends TeamReporter {
 
   @Override public void printReport() {
 
-    Set<Map.Entry<Integer, List<Player>>> entries = report.getPlayersByHeight().entrySet();
+    Set<Map.Entry<Integer, List<TeamPlayer>>> entries = report.getPlayersByHeight().entrySet();
 
-    for (Map.Entry<Integer, List<Player>> integerMapEntry : entries) {
-
-      System.out.printf("Height %d inches%n", integerMapEntry.getKey());
-      List<Player> players = integerMapEntry.getValue();
-
-      for (Player player : players) {
-        System.out.printf("%s, %n", player.toString());
-      }
-
+    PrompterUtil.displayTeamPlayersTitle();
+    for (Map.Entry<Integer, List<TeamPlayer>> integerMapEntry : entries) {
+      List<TeamPlayer> players = integerMapEntry.getValue();
+      PrompterUtil.printPrettyList(players);
     }
   }
 }
