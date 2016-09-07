@@ -65,6 +65,7 @@ public class MenuPrompter extends BasicPrompter {
 
   private void promptsForGeneratingReports() {
     System.out.printf("%nWhat kind of report do you want to generate%n");
+    System.out.printf("%n[1] Height report%n[2] Experience report%n");
     Integer optionSelected = PrompterUtil.tryParse(readLine());
     if(optionSelected != null) {
       switch (optionSelected) {
