@@ -35,6 +35,13 @@ public class TeamManager implements TeamManagerContract {
     }
   }
 
+  @Override public void showTeam(Team team) {
+    List<Player> playersFromTeam = new ArrayList<>(team.getPlayers());
+    PrompterUtil.displayTeamTitle(team.getName());
+    Collections.sort(playersFromTeam);
+    PrompterUtil.printPrettyOrderedList(playersFromTeam);
+  }
+
   @Override public void showTeams() {
     if (teams.size() > 0) {
       Collections.sort(teams, new TeamByNameComparator());

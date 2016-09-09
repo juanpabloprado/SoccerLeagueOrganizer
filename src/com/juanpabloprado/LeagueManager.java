@@ -14,10 +14,10 @@ public class LeagueManager {
     // Your code here!
 
     LeagueManagerMenu menu = new LeagueManagerMenu(
-        new String[] {"Create a new team", "Add players to a team", "Remove players from a team", "Generate team reports", "Show teams", "Exit"});
+        new String[] {"Create a new team", "Add players to a team", "Remove players from a team",
+            "Generate team reports", "Show teams", "Print my teams roster", "Exit"});
     MenuPrompter menuPrompter = new MenuPrompter(menu);
     final TeamManager teamManager = new TeamManager(players);
-    menuPrompter.setTeamManagerContract(teamManager);
-    menuPrompter.start();
+    menuPrompter.start(teamManager);
   }
 }

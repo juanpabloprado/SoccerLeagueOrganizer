@@ -8,6 +8,7 @@ import com.juanpabloprado.player.PlayerListener;
 import com.juanpabloprado.player.RemovesPlayerPrompter;
 import com.juanpabloprado.team.TeamManager;
 import com.juanpabloprado.team.TeamManagerContract;
+import com.juanpabloprado.team.TeamPrompter;
 import com.juanpabloprado.util.PrompterUtil;
 import java.util.HashSet;
 
@@ -18,6 +19,7 @@ public class MenuPrompter extends BasicPrompter {
   private int currentMenuItem;
   private LeagueManagerMenu menu;
   public TeamManagerContract teamManagerContract;
+  private TeamPrompter teamPrompter;
 
   public MenuPrompter(LeagueManagerMenu menu) {
     this.menu = menu;
@@ -63,7 +65,22 @@ public class MenuPrompter extends BasicPrompter {
         promptMenu();
         break;
       case 6:
+        promptsForShowingMyTeam();
+        promptMenu();
         break;
+      case 7:
+        break;
+    }
+  }
+
+  private void promptsForShowingMyTeam() {
+    Integer teamId = teamPrompter.promptForTeam();
+    if(teamId != null) {
+      teamManagerContract.showTeam(teamManagerContract.chooseTeam(teamId -1));
+    }
+    else {
+      System.out.println("Invalid option, please try again");
+      promptsForShowingMyTeam();
     }
   }
 
@@ -137,12 +154,11 @@ public class MenuPrompter extends BasicPrompter {
     return optionSelected > 0 && optionSelected <= menu.getMenuItems().length;
   }
 
-  public void start() {
+  public void start(TeamManagerContract teamManagerContract) {
+    this.teamManagerContract = teamManagerContract;
+    teamPrompter = new TeamPrompter(teamManagerContract);
     PrompterUtil.displayWelcome();
     promptMenu();
   }
 
-  public void setTeamManagerContract(TeamManagerContract teamManagerContract) {
-    this.teamManagerContract = teamManagerContract;
-  }
 }

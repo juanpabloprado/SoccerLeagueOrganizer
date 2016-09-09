@@ -11,6 +11,8 @@ public interface TeamManagerContract {
 
   void addTeam(Team team);
 
+  void showTeam(Team team);
+
   void showAvailablePlayers();
 
   Player choosePlayer(int index);
